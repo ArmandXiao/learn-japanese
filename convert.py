@@ -5,15 +5,20 @@ fo = open("./sentences.sep.txt", "w")
 
 _k2h = kakasi()
 _k2h.setMode('J', 'H')
+# convert from Japanese to Hiragana(平假名)
 k2h = _k2h.getConverter()
 
 _h2a = kakasi()
 _h2a.setMode('H', 'a')
 _h2a.setMode('K', 'a')
+# convert from Hiragana and Katakana to alphabet
 h2a = _h2a.getConverter()
 
+# example line
+# 1、はじめまして。 初次见面。
 while True:
     s = fi.readline()
+    # no space line allowed 
     if s == "":
         break
     num = jp = jph = jpa = cn = ""
@@ -25,7 +30,7 @@ while True:
             else:
                 num += char
         elif index == 1:
-            jp += char
+            jp += char + " "
             if char == '。':
                 index = 2
         else:

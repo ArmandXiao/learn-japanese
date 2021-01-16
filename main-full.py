@@ -1,11 +1,23 @@
 import os
 
+def processAns(ans, jpa):
+    index = 0
+    ans = ans.strip()
+    ans = list(ans)
+    while index < len(jpa) and index < len(ans):
+        if jpa[index] == " ":
+            # list has no return value
+            ans.insert(index, " ")
+        index += 1
+
+    return "".join(ans)
+
 class Sentence:
     def __init__(self, num, jp, jph, jpa, cn):
         self.num = num.strip()
         self.jp = jp.strip()
         self.jph = jph.strip()
-        self.jpa = jpa.strip()
+        self.jpa = jpa.strip().strip("。")
         self.cn = cn.strip()
 
 fi = open("sentences.sep.txt", "r")
@@ -89,19 +101,23 @@ for sentence in sentences:
         print(sentence.jp)
         print(sentence.jph)
         while True:
-            ans = input("Type the correct romaji (type 'exit' to quit): ").strip()
+            ans = input("Type the correct romaji (type 'exit' to quit): \n").strip()
+            ans = ans.strip().strip("。").replace(" ","")
+            # delete space for matching
             if ans == "exit":
                 exit()
-            if ans == sentence.jpa:
+            if ans == sentence.jpa.replace(" ",""):
                 print("Correct!")
                 print("Chisese:", sentence.cn)
                 _ = input(" --- press enter to continue --- ")
                 break
             else:
                 yn = input("Incorrect! Input 'y' to reveal answer. Input anything else to try again.")
+                ans_toprint = processAns(ans, sentence.jpa)
                 if yn == "y":
-                    print("Your answer:", ans)
+                    print("Your answer:", ans_toprint)
                     print("Correct ans:", sentence.jpa)
+                    print("Hiragana   :", sentence.jph)
                     input("Got it? <Enter> to try again!")
                     os.system("clear")
                     print("#" + sentence.num)
