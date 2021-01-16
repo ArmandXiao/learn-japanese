@@ -1,5 +1,7 @@
 # Learn Japanese with Shell!
 
-## `python3 main-full.py` to start!
+# How to use? Choose one that fits your OS.
+1. `python3 main-windows.py`
+2. `python3 main-linux.py`
 
 
